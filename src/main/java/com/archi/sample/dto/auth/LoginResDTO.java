@@ -1,12 +1,10 @@
 package com.archi.sample.dto.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 
-@Getter
-@AllArgsConstructor
+@Setter
+@NoArgsConstructor
 public class LoginResDTO {
-    @NonNull
+    private boolean error;
     private String name;
 }
