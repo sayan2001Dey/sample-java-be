@@ -7,6 +7,6 @@ import lombok.Getter;
 @JsonAppend
 @Getter
 @AllArgsConstructor
-public class LoginResDTO {
-    private String name;
+public class RegisterResDTO {
+    private String message;
 }
