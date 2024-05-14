@@ -1,11 +1,10 @@
 package com.archi.sample.controller;
 
+import com.archi.sample.dto.auth.LoginReqDTO;
+import com.archi.sample.dto.auth.RegisterReqDTO;
 import com.archi.sample.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -13,11 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
-    @GetMapping("/login")
-    public String login() {
-        System.out.println("r");
-        return "test";
+    @PostMapping("/login")
+    public String login(@RequestBody LoginReqDTO loginReqDTO) {
+        return authService.login(loginReqDTO.getEmail(), loginReqDTO.getPassword());
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestBody RegisterReqDTO registerReqDTO) {
+        if(authService.register(registerReqDTO.getName(), registerReqDTO.getEmail(),registerReqDTO.getPassword()))
+            return "Success";
+        return "Couldn't create";
     }
 }
