@@ -26,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestBody RegisterReqDTO registerReqDTO) {
-        authService.register(registerReqDTO.getName(), registerReqDTO.getEmail(),registerReqDTO.getPassword())
+        authService.register(registerReqDTO.getName(), registerReqDTO.getEmail(),registerReqDTO.getPassword());
         return "Success";
     }
 }
