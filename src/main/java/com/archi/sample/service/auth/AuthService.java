@@ -1,4 +1,4 @@
-package com.archi.sample.service;
+package com.archi.sample.service.auth;
 
 public interface AuthService {
     public String login(String email, String password);

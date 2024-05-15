@@ -1,4 +1,4 @@
-package com.archi.sample.service;
+package com.archi.sample.service.auth;
 
 import com.archi.sample.model.User;
 import com.archi.sample.repository.UserRepository;
