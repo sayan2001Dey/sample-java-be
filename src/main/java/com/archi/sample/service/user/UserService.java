@@ -1,5 +1,6 @@
 package com.archi.sample.service.user;
 
 public interface UserService {
-    public void UpdateUser(String email, String name);
+    public void updateUser(String email, String name);
+    public void deleteUser(String email);
 }
