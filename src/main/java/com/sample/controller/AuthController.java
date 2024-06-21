@@ -1,12 +1,13 @@
-package com.archi.sample.controller;
+package com.sample.controller;
 
-import com.archi.sample.dto.auth.LoginReqDTO;
-import com.archi.sample.dto.auth.LoginResDTO;
-import com.archi.sample.dto.auth.RegisterReqDTO;
-import com.archi.sample.dto.auth.RegisterResDTO;
-import com.archi.sample.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.sample.dto.auth.LoginReqDTO;
+import com.sample.dto.auth.LoginResDTO;
+import com.sample.dto.auth.RegisterReqDTO;
+import com.sample.dto.auth.RegisterResDTO;
+import com.sample.service.auth.AuthService;
 
 @RestController
 @CrossOrigin

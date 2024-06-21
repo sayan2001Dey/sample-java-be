@@ -1,9 +1,10 @@
-package com.archi.sample.service.auth;
+package com.sample.service.auth;
 
-import com.archi.sample.model.User;
-import com.archi.sample.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sample.model.User;
+import com.sample.repository.UserRepository;
 
 @Service
 public class AuthServiceImpl implements AuthService {

@@ -1,4 +1,4 @@
-package com.archi.sample.dto.auth;
+package com.sample.dto.auth;
 
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.AllArgsConstructor;

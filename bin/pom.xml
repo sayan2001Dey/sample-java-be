@@ -8,7 +8,7 @@
 		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.back</groupId>
+	<groupId>com.archi</groupId>
 	<artifactId>sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Sample Project</name>

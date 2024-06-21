@@ -1,10 +1,11 @@
-package com.archi.sample.repository;
+package com.sample.repository;
 
-import com.archi.sample.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.sample.model.User;
 
 import javax.transaction.Transactional;
 

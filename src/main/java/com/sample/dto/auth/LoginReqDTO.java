@@ -1,4 +1,4 @@
-package com.archi.sample.dto.auth;
+package com.sample.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
