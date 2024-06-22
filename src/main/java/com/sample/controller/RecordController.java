@@ -1,14 +1,22 @@
 package com.sample.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.model.Record;
 import com.sample.service.record.RecordService;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 
 @RestController
@@ -17,13 +25,73 @@ public class RecordController {
 
     @Autowired
     private RecordService recordService;
+    
+    @Autowired
+    private ServletContext servletContext;
 
-    // Create a new Record
-    @PostMapping("/save")
-    public ResponseEntity<Record> saveRecord(@RequestBody Record record) {
-        Record savedRecord = recordService.saveRecord(record);
-        return new ResponseEntity<>(savedRecord, HttpStatus.CREATED);
-    }
+    
+
+    
+        @PostMapping("/save")
+        public ResponseEntity<Record> saveRecord(@RequestParam("scanCopyFiles") MultipartFile[] scanCopyFiles,
+                                                 @RequestParam("mutationFiles") MultipartFile[] mutationFiles,
+                                                 @RequestParam("conversionFiles") MultipartFile[] conversionFiles,
+                                                 @RequestParam("documentFiles") MultipartFile[] documentFiles,
+                                                 @RequestParam("areaMapFiles")  MultipartFile[] areaMapFiles,
+                                                 @RequestParam("hcdocumentFiles") MultipartFile[] hcdocumentFiles) {
+            try {
+                Record record = new Record();
+
+                // Process scanCopy files
+                record.setScanCopy(processFiles(scanCopyFiles));
+
+                // Process mutation files
+                record.setMutationFile(processFiles(mutationFiles));
+
+                // Process conversion files
+                record.setConversionFile(processFiles(conversionFiles));
+
+                // Process document files
+                record.setDocumentFile(processFiles(documentFiles));
+                
+                // Process areaMap files
+                record.setAreaMapFile(processFiles(areaMapFiles));
+
+                // Process hcdocument files
+                record.setHcdocumentFile(processFiles(hcdocumentFiles));
+
+                // Save record to database (assuming recordService is correctly injected)
+                Record savedRecord = recordService.saveRecord(record);
+
+                // Return response with the saved record and HTTP status created
+                return new ResponseEntity<>(savedRecord, HttpStatus.CREATED);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        // Helper method to process MultipartFile[] and return List<String>
+        private List<String> processFiles(MultipartFile[] files) throws IOException {
+            List<String> filePaths = new ArrayList<>();
+            String uploadsDir = "C:\\Users\\BMH\\Desktop\\New folder (3)";
+
+            for (MultipartFile file : files) {
+                String realPathToUploads = servletContext.getRealPath(uploadsDir);
+                if (!new File(realPathToUploads).exists()) {
+                    new File(realPathToUploads).mkdir();
+                }
+
+                String originalFileName = file.getOriginalFilename();
+                String filePath = Paths.get(realPathToUploads, originalFileName).toString();
+                Path path = Paths.get(filePath);
+                Files.write(path, file.getBytes());
+                filePaths.add(filePath);
+            }
+
+            return filePaths;
+        }
+    
 
     // Get all Records
     @GetMapping("/getAll")
@@ -44,7 +112,7 @@ public class RecordController {
     }
 
     // Update an existing Record
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<Record> updateRecord(@PathVariable Long id, @RequestBody Record record) {
         Record currentRecord = recordService.getRecordById(id);
         if (currentRecord != null) {

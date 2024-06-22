@@ -1,10 +1,10 @@
 package com.sample.service.record;
 
 import com.sample.model.Record;
-
 import com.sample.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +32,7 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    @Transactional
     public Record updateRecord(Record record) {
         // Ensure the record exists in the database
         if (record.getId() != null && recordRepository.existsById(record.getId())) {
