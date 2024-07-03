@@ -2,7 +2,6 @@ package com.sample.model;
 
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -62,7 +61,11 @@ public class Record {
     
     @Column(name = "deed_no", length = 50)
     private String deedNo;
-
+    
+    
+    @Column(name = "deed_date", length = 50)
+    private String deedDate;
+    
     @Column(name = "scan_copy", length = 255) 
     @ElementCollection
     private List<String> scanCopy;

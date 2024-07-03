@@ -1,8 +1,6 @@
 package com.sample.service.record;
 
 import com.sample.model.Record;
-
-
 import java.util.List;
 
 public interface RecordService {
